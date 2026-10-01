@@ -1,6 +1,5 @@
 #include<iostream>
 #include<string>
-
 using namespace std;
 #define SIZE 3
 
@@ -11,9 +10,5 @@ double getRate(string vehicle, string vehicleType[], double rate[]);
 double calculateDiscount(double charge, char member);
 
 int main(){
-
-
-
-
-return 0;
+    return 0;
 }
