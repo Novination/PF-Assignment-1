@@ -28,6 +28,7 @@ int main(){
     return 0;
 }
 
+// Gets input and stores in the corresponding variables.
 void getInput(int *ptrEntry, int *ptrExit, string *ptrVehicle, char *ptrMember){
     cout << "Enter Entry Time: ";
     cin >> *ptrEntry;
@@ -37,9 +38,18 @@ void getInput(int *ptrEntry, int *ptrExit, string *ptrVehicle, char *ptrMember){
 
     cout << "Enter Vehicle Type (Car/Motorcycle/Van): ";
     cin >> *ptrVehicle;
+    
+    while ((*ptrVehicle != "Car") && (*ptrVehicle != "Motorcycle") && (*ptrVehicle != "Van")){
+    	cout << endl << "Invalid Input Type!" << endl;
+    	
+    	cout << "Enter Vehicle Type (Car/Motorcycle/Van): ";
+    	cin >> *ptrVehicle;
+	}
 
-    cout << "Enter Membership Status (T/F): ";
-    cin >> *ptrMember;
+    while ((*ptrMember != 'T') && (*ptrMember != 'F')){
+    	cout << "Enter Membership Status (T/F): ";
+    	cin >> *ptrMember;
+	}
 }
 
 int calculateDuration(int entry, int exit){
