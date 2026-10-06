@@ -7,35 +7,32 @@ using namespace std;
 // Function Declarations
 
 void getInput(double *ptrEntry, double *ptrExit, string *ptrVehicle, char *ptrMember);
-void displayOutput();
+void displayOutput(double parkingDuration, double basicCharge, double discount, double finalCharge);
 
 double calculateHours(double entry, double exit);
 
 double getRate(string vehicle);
 double getDiscount(double basicCharge, char memberStatus);
 
-double calculateBasicCharge(double parkingHours, double hourlyRate);
+double calculateBasicCharge(double parkingDuration, double hourlyRate);
 double calculateFinalCharge(double basicCharge, double discount);
 
 // Main Function
 
 int main(){
-    double entryTime, exitTime, parkingHours, hourlyRate, basicCharge, discount;
+    double entryTime, exitTime, parkingDuration, hourlyRate, basicCharge, discount, finalCharge;
     string vehicleType;
     char membershipStatus;
 
     getInput(&entryTime, &exitTime, &vehicleType, &membershipStatus);
 
-    parkingHours = calculateHours(entryTime, exitTime);
-    
+    parkingDuration = calculateHours(entryTime, exitTime);
     hourlyRate = getRate(vehicleType);
-    
-    basicCharge = calculateBasicCharge(parkingHours, hourlyRate);
-    
+    basicCharge = calculateBasicCharge(parkingDuration, hourlyRate);
     discount = getDiscount(basicCharge, membershipStatus);
+    finalCharge = calculateFinalCharge(basicCharge, discount);
 
-    cout << endl << entryTime << endl << exitTime << endl << vehicleType << endl << membershipStatus;
-    cout << endl << parkingHours << endl << basicCharge << endl << discount << endl;
+    displayOutput(parkingDuration, basicCharge, discount, finalCharge);
 
     return 0;
 }
@@ -76,6 +73,13 @@ void getInput(double *ptrEntry, double *ptrExit, string *ptrVehicle, char *ptrMe
 	}
 }
 
+void displayOutput(double parkingDuration, double basicCharge, double discount, double finalCharge){
+    cout << endl << "Parking Duration: " << parkingDuration << " Hours"
+         << endl << "Basic Charge: RM" << basicCharge
+         << endl << "Discount: RM" << discount
+         << endl << "Final Charge: RM" << finalCharge;
+}
+
 double calculateHours(double entry, double exit){
     double parkingDuration;
 
@@ -85,18 +89,22 @@ double calculateHours(double entry, double exit){
         parkingDuration += 24;
     }
 
-    return parkingDuration;
+    return ceil(parkingDuration);
 }
 
 double getRate(string vehicle){
 	double rate;
+
+    double carRate = 3.0;
+	double motorcycleRate = 1.5;
+	double vanRate = 5.0;
 	
 	if (vehicle == "Car") {
-		rate = 3;
+		rate = carRate;
 	} else if (vehicle == "Motorcycle") {
-		rate = 1.5;
+		rate = motorcycleRate;
 	} else {
-		rate = 5; 
+		rate = vanRate; 
 	}
 	
 	return rate;
@@ -116,10 +124,18 @@ double getDiscount(double basicCharge, char memberStatus){
 	return discount;
 }
 
-double calculateBasicCharge(double parkingHours, double hourlyRate){
+double calculateBasicCharge(double parkingDuration, double hourlyRate){
 	double basicCharge;
 	
-	basicCharge = parkingHours * hourlyRate;
+	basicCharge = parkingDuration * hourlyRate;
 	
 	return basicCharge;
+}
+
+double calculateFinalCharge(double basicCharge, double discount){
+    double finalCharge;
+
+    finalCharge = basicCharge - discount;
+
+    return finalCharge;
 }
