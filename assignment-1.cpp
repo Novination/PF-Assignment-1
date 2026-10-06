@@ -62,7 +62,7 @@ void getInput(double *ptrEntry, double *ptrExit, string *ptrVehicle, char *ptrMe
 	}
 
     // Enter Membership Status
-    cout << "Enter Membership Status (T/F): ";
+    cout << "Enter Membership Status (T = Member / F = Non-member ): ";
     cin >> *ptrMember;
 
     while ((*ptrMember != 'T') && (*ptrMember != 'F')){
@@ -78,7 +78,8 @@ void displayOutput(double parkingDuration, double basicCharge, double discount, 
     cout << endl << "Parking Duration: " << parkingDuration << " Hours"
          << endl << "Basic Charge: RM" << basicCharge
          << endl << "Discount: RM" << discount
-         << endl << "Final Charge: RM" << finalCharge;
+         << endl << "Final Charge: RM" << finalCharge
+		 << endl;
 }
 
 // Calculates Parking Duration in Hours
@@ -106,7 +107,7 @@ double getRate(string vehicle){
 		rate = carRate;
 	} else if (vehicle == "Motorcycle") {
 		rate = motorcycleRate;
-	} else {
+	} else if (vehicle == "Van") {
 		rate = vanRate; 
 	}
 	
