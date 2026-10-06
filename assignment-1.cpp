@@ -66,7 +66,7 @@ void getInput(double *ptrEntry, double *ptrExit, string *ptrVehicle, char *ptrMe
     cin >> *ptrMember;
 
     while ((*ptrMember != 'T') && (*ptrMember != 'F')){
-        cout << "Invalid Membership Status!";
+        cout << endl << "Invalid Membership Status!" << endl;
 
     	cout << "Enter Membership Status (T/F): ";
     	cin >> *ptrMember;
