@@ -9,7 +9,7 @@ using namespace std;
 void getInput(double *ptrEntry, double *ptrExit, string *ptrVehicle, char *ptrMember);
 void displayOutput(double parkingDuration, double basicCharge, double discount, double finalCharge);
 
-double calculateHours(double entry, double exit);
+double calculateDuration(double entry, double exit);
 
 double getRate(string vehicle);
 double getDiscount(double basicCharge, char memberStatus);
@@ -26,7 +26,7 @@ int main(){
 
     getInput(&entryTime, &exitTime, &vehicleType, &membershipStatus);
 
-    parkingDuration = calculateHours(entryTime, exitTime);
+    parkingDuration = calculateDuration(entryTime, exitTime);
     hourlyRate = getRate(vehicleType);
     basicCharge = calculateBasicCharge(parkingDuration, hourlyRate);
     discount = getDiscount(basicCharge, membershipStatus);
@@ -73,6 +73,7 @@ void getInput(double *ptrEntry, double *ptrExit, string *ptrVehicle, char *ptrMe
 	}
 }
 
+// Displays Outputs
 void displayOutput(double parkingDuration, double basicCharge, double discount, double finalCharge){
     cout << endl << "Parking Duration: " << parkingDuration << " Hours"
          << endl << "Basic Charge: RM" << basicCharge
@@ -80,7 +81,8 @@ void displayOutput(double parkingDuration, double basicCharge, double discount, 
          << endl << "Final Charge: RM" << finalCharge;
 }
 
-double calculateHours(double entry, double exit){
+// Calculates Parking Duration in Hours
+double calculateDuration(double entry, double exit){
     double parkingDuration;
 
     parkingDuration = exit - entry;
@@ -92,6 +94,7 @@ double calculateHours(double entry, double exit){
     return ceil(parkingDuration);
 }
 
+// Gets Rate Based on Vehicle Type
 double getRate(string vehicle){
 	double rate;
 
@@ -110,6 +113,7 @@ double getRate(string vehicle){
 	return rate;
 }
 
+// Gets Discount Bsaed on Membership Status
 double getDiscount(double basicCharge, char memberStatus){
 	double discount, memberDiscountRate;
 	
@@ -124,6 +128,7 @@ double getDiscount(double basicCharge, char memberStatus){
 	return discount;
 }
 
+// Calculates Basic Charge Amount
 double calculateBasicCharge(double parkingDuration, double hourlyRate){
 	double basicCharge;
 	
@@ -132,6 +137,7 @@ double calculateBasicCharge(double parkingDuration, double hourlyRate){
 	return basicCharge;
 }
 
+// Calculates Final Charge Amount
 double calculateFinalCharge(double basicCharge, double discount){
     double finalCharge;
 
